@@ -10,3 +10,19 @@ patches:
     - op: replace
       path: /spec/chart/spec/version
       value: 1.13.3
+- target:
+    kind: HelmRelease
+    name: weave-gitops
+  patch: |
+    - op: replace
+      path: /spec/chart/spec/version
+      value: 4.0.36
+    - op: replace
+      path: /spec/values/adminUser
+      value:
+        create: true
+        username: admin
+        # Change password by generating a new hash with:
+        # https://docs.gitops.weave.works/docs/configuration/securing-access-to-the-dashboard/#login-via-a-cluster-user-account
+        # bcrypt hash for password "flux"
+        passwordHash: "$2a$10$P/tHQ1DNFXdvX0zRGA8LPeSOyb0JXq9rP3fZ4W8HGTpLV7qHDlWhe"
